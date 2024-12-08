@@ -9,6 +9,8 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
+    // php artisan make:model Branch -m
     public function up(): void
     {
         Schema::create('branches', function (Blueprint $table) {

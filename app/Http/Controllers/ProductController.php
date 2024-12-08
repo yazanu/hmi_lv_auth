@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Branch;
 use Gate;
 
 class ProductController extends Controller
@@ -23,7 +24,8 @@ class ProductController extends Controller
     public function create()
     {
         if(Gate::allows('isAdmin') || Gate::allows('isManager')){
-            return view('product.create');
+            $branches = Branch::all();
+            return view('product.create', compact('branches'));
         }else {
             abort(401, 'Unauthorized');
         }
@@ -46,6 +48,7 @@ class ProductController extends Controller
                 'name' => $request->name,
                 'price' => $request->price,
                 'qty' => $request->qty,
+                'branch_id' => $request->branch_id,
                 'description' => $request->description,
             ]);
     
@@ -74,8 +77,9 @@ class ProductController extends Controller
     public function edit(string $id)
     {
         if(Gate::allows('isAdmin') || Gate::allows('isManager')){
+            $branches = Branch::all();
             $product = Product::find($id);
-            return view('product.edit',compact('product'));
+            return view('product.edit',compact('product', 'branches'));
         }else {
             abort(401, 'Unauthorized');
         }

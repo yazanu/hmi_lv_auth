@@ -9,6 +9,8 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
+    // php artisan make:migration add_branch_id_column_to_products_table --table=products
     public function up(): void
     {
         Schema::table('products', function (Blueprint $table) {

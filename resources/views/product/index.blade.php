@@ -23,6 +23,7 @@
                         <th scope="col">Name</th>
                         <th scope="col">Price</th>
                         <th scope="col">Qty</th>
+                        <th scope="col">Branch</th>
                         <th scope="col">Description</th>
                         @if (Gate::allows('isAdmin') || Gate::allows('isManager'))
                         <th scope="col">Action</th>
@@ -37,6 +38,7 @@
                                 <td>{{$product->name}}</td>
                                 <td>{{$product->price}}</td>
                                 <td>{{$product->qty}}</td>
+                                <td>{{$product->branch->branch_name}}</td>
                                 <td>{!! $product->description !!}</td>
                                 
                                 @if (Gate::allows('isAdmin') || Gate::allows('isManager'))

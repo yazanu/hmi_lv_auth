@@ -26,25 +26,35 @@
         <div class="row">
             <div class="col-12">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label>Name</label>
                             <input type="text" name="name" class="form-control" placeholder="product name">
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label>Price</label>
                             <input type="text" name="price" class="form-control" placeholder="product price">
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label>Qty</label>
                             <input type="text" name="qty" class="form-control" placeholder="product qty">
                         </div>
                     </div>
-                    
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Branch</label>
+                            <select name="branch_id" id="" class="form-control">
+                                <option value="">Please select branch</option>
+                                @foreach ($branches as $branch)
+                                    <option value="{{$branch->id}}">{{$branch->branch_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div><br>
