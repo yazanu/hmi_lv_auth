@@ -9,6 +9,7 @@ use JWTAuth;
 use Hash;
 use Auth;
 use App\Models\Product;
+use App\Models\Branch;
 
 class AuthController extends Controller
 {
@@ -73,11 +74,60 @@ class AuthController extends Controller
 
     public function getAllProducts()
     {
-        $products = Product::select('id', 'name', 'price', 'qty', 'description')->get();
+        $products = Product::leftJoin('branches', 'branches.id', 'products.branch_id')
+        ->select('products.id', 'name', 'price', 'qty', 'branches.branch_name','description')->get();
 
         return response()->json([
             'success' => 200,
             'data' => $products
+        ]);
+    }
+
+    public function getProductDetail($id)
+    {
+        $product = Product::findOrFail($id);
+        return response()->json([
+            'success' => 200,
+            'data' => [
+                'id' => $product->id,
+                'name' => $product->name,
+                'price' => $product->price,
+                'qty' => $product->qty,
+                'description' => $product->description,
+                'branch_name' => $product->branch->branch_name,
+            ]
+        ]); 
+    }
+
+    public function getProductByBranch()
+    {
+        $branches = Branch::with('product')->select('branches.id','branches.branch_name')->get();
+
+        return response()->json([
+            'success' => 200,
+            'data' => $branches
+        ]);
+    }
+
+    public function getUserProfile()
+    {
+        
+        return response()->json([
+            'success' => 200,
+            'id' => auth()->user()->id,
+            'name' => auth()->user()->name,
+            'email' => auth()->user()->email,
+            'role' => auth()->user()->role,
+        ]);
+    }
+
+    public function getUsers()
+    {
+        $users = User::all();
+
+        return response()->json([
+            'success' => 200,
+            'data' => $users
         ]);
     }
 }

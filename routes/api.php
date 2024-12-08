@@ -27,5 +27,9 @@ Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware('auth:api')->group(function(){
     Route::get('/products', [AuthController::class, 'getAllProducts']);
+    Route::get('/product/{id}', [AuthController::class, 'getProductDetail']);
+    Route::get('/product-by-branch', [AuthController::class, 'getProductByBranch']);
+    Route::get('user-profile', [AuthController::class, 'getUserProfile']);
+    Route::get('users', [AuthController::class, 'getUsers']);
 });
 
