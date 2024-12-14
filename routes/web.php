@@ -21,5 +21,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function(){
     Route::get('/login', 'AuthController@loginForm');
     Route::post('/user-login', 'AuthController@login');
     Route::resource('products', 'ProductController')->middleware(['is_active']);
+    Route::resource('permissions', 'PermissionController');
 });
 

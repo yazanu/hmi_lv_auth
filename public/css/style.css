@@ -1,0 +1,31 @@
+.rs_role{
+    border: 1px solid #ddd;
+    margin-right: 10px;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    flex: 0 0 23.7% !important;
+    max-width: 25% !important;
+    padding-top: 60px;
+    font-size: 15px;
+}
+
+.rs_role h6{
+    position: absolute;
+    top: 117px;
+    width: 20%;
+    background-color: #257cf6;
+    color: #fff;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+}
+
+.rs_role input[type="checkbox"]{
+    margin-right: 5px !important;
+}
+
+.rs_role span{
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}

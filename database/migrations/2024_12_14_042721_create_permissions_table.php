@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //php artisan make:migration add_role_column_to_users_table --table=users
-        Schema::table('users', function (Blueprint $table) {
-            $table->integer('role')->default(1)->after('password');
+        Schema::create('permissions', function (Blueprint $table) {
+            $table->id();
+            $table->integer('role_id');
+            $table->string('route_name');
+            $table->timestamps();
         });
     }
 
@@ -22,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('permissions');
     }
 };

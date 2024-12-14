@@ -10,13 +10,14 @@ use Hash;
 use Auth;
 use App\Models\Product;
 use App\Models\Branch;
+use App\Http\Resources\UserResource;
 
 class AuthController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth:api', ['except' => ['register', 'login']]);
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['register', 'login']]);
+    }
 
     public function register(Request $request)
     {
@@ -111,23 +112,25 @@ class AuthController extends Controller
 
     public function getUserProfile()
     {
-        
-        return response()->json([
-            'success' => 200,
-            'id' => auth()->user()->id,
-            'name' => auth()->user()->name,
-            'email' => auth()->user()->email,
-            'role' => auth()->user()->role,
-        ]);
+        // return response()->json([
+        //     'success' => 200,
+        //     'id' => auth()->user()->id,
+        //     'name' => auth()->user()->name,
+        //     'email' => auth()->user()->email,
+        //     'role' => auth()->user()->role,
+        // ]);
+
+        return new UserResource(auth()->user()->id);
     }
 
     public function getUsers()
     {
         $users = User::all();
 
-        return response()->json([
-            'success' => 200,
-            'data' => $users
-        ]);
+        // return response()->json([
+        //     'success' => 200,
+        //     'data' => $users
+        // ]);
+        return UserResource::collection($users);
     }
 }
